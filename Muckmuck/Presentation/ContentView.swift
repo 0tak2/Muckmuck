@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var userProfileModel = UserProfileModel()
+    
     var body: some View {
         TabView {
             MuckTagListView()
@@ -21,6 +23,13 @@ struct ContentView: View {
                     Image(systemName: "gearshape.fill")
                     Text("설정")
                 }
+        }
+        .onAppear {
+            userProfileModel.onAppeared()
+        }
+        .sheet(isPresented: $userProfileModel.onboardingNeeded) {
+            OnboardingView()
+                .environmentObject(userProfileModel)
         }
     }
 }
