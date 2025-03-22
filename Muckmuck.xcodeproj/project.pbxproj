@@ -1,0 +1,563 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		3DDF4F512D8E407100BEDBBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3DDF4F382D8E407000BEDBBA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3DDF4F3F2D8E407000BEDBBA;
+			remoteInfo = Muckmuck;
+		};
+		3DDF4F5B2D8E407100BEDBBA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3DDF4F382D8E407000BEDBBA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3DDF4F3F2D8E407000BEDBBA;
+			remoteInfo = Muckmuck;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3DDF4F402D8E407000BEDBBA /* Muckmuck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Muckmuck.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DDF4F502D8E407100BEDBBA /* MuckmuckTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MuckmuckTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DDF4F5A2D8E407100BEDBBA /* MuckmuckUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MuckmuckUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		3DDF4F422D8E407000BEDBBA /* Muckmuck */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Muckmuck;
+			sourceTree = "<group>";
+		};
+		3DDF4F532D8E407100BEDBBA /* MuckmuckTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MuckmuckTests;
+			sourceTree = "<group>";
+		};
+		3DDF4F5D2D8E407100BEDBBA /* MuckmuckUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = MuckmuckUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3DDF4F3D2D8E407000BEDBBA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DDF4F4D2D8E407100BEDBBA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DDF4F572D8E407100BEDBBA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3DDF4F372D8E407000BEDBBA = {
+			isa = PBXGroup;
+			children = (
+				3DDF4F422D8E407000BEDBBA /* Muckmuck */,
+				3DDF4F532D8E407100BEDBBA /* MuckmuckTests */,
+				3DDF4F5D2D8E407100BEDBBA /* MuckmuckUITests */,
+				3DDF4F412D8E407000BEDBBA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3DDF4F412D8E407000BEDBBA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3DDF4F402D8E407000BEDBBA /* Muckmuck.app */,
+				3DDF4F502D8E407100BEDBBA /* MuckmuckTests.xctest */,
+				3DDF4F5A2D8E407100BEDBBA /* MuckmuckUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3DDF4F3F2D8E407000BEDBBA /* Muckmuck */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3DDF4F642D8E407100BEDBBA /* Build configuration list for PBXNativeTarget "Muckmuck" */;
+			buildPhases = (
+				3DDF4F3C2D8E407000BEDBBA /* Sources */,
+				3DDF4F3D2D8E407000BEDBBA /* Frameworks */,
+				3DDF4F3E2D8E407000BEDBBA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				3DDF4F422D8E407000BEDBBA /* Muckmuck */,
+			);
+			name = Muckmuck;
+			packageProductDependencies = (
+			);
+			productName = Muckmuck;
+			productReference = 3DDF4F402D8E407000BEDBBA /* Muckmuck.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3DDF4F4F2D8E407100BEDBBA /* MuckmuckTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3DDF4F672D8E407100BEDBBA /* Build configuration list for PBXNativeTarget "MuckmuckTests" */;
+			buildPhases = (
+				3DDF4F4C2D8E407100BEDBBA /* Sources */,
+				3DDF4F4D2D8E407100BEDBBA /* Frameworks */,
+				3DDF4F4E2D8E407100BEDBBA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3DDF4F522D8E407100BEDBBA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				3DDF4F532D8E407100BEDBBA /* MuckmuckTests */,
+			);
+			name = MuckmuckTests;
+			packageProductDependencies = (
+			);
+			productName = MuckmuckTests;
+			productReference = 3DDF4F502D8E407100BEDBBA /* MuckmuckTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		3DDF4F592D8E407100BEDBBA /* MuckmuckUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3DDF4F6A2D8E407100BEDBBA /* Build configuration list for PBXNativeTarget "MuckmuckUITests" */;
+			buildPhases = (
+				3DDF4F562D8E407100BEDBBA /* Sources */,
+				3DDF4F572D8E407100BEDBBA /* Frameworks */,
+				3DDF4F582D8E407100BEDBBA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3DDF4F5C2D8E407100BEDBBA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				3DDF4F5D2D8E407100BEDBBA /* MuckmuckUITests */,
+			);
+			name = MuckmuckUITests;
+			packageProductDependencies = (
+			);
+			productName = MuckmuckUITests;
+			productReference = 3DDF4F5A2D8E407100BEDBBA /* MuckmuckUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3DDF4F382D8E407000BEDBBA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					3DDF4F3F2D8E407000BEDBBA = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					3DDF4F4F2D8E407100BEDBBA = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 3DDF4F3F2D8E407000BEDBBA;
+					};
+					3DDF4F592D8E407100BEDBBA = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 3DDF4F3F2D8E407000BEDBBA;
+					};
+				};
+			};
+			buildConfigurationList = 3DDF4F3B2D8E407000BEDBBA /* Build configuration list for PBXProject "Muckmuck" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3DDF4F372D8E407000BEDBBA;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 3DDF4F412D8E407000BEDBBA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3DDF4F3F2D8E407000BEDBBA /* Muckmuck */,
+				3DDF4F4F2D8E407100BEDBBA /* MuckmuckTests */,
+				3DDF4F592D8E407100BEDBBA /* MuckmuckUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3DDF4F3E2D8E407000BEDBBA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DDF4F4E2D8E407100BEDBBA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DDF4F582D8E407100BEDBBA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3DDF4F3C2D8E407000BEDBBA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DDF4F4C2D8E407100BEDBBA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3DDF4F562D8E407100BEDBBA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3DDF4F522D8E407100BEDBBA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3DDF4F3F2D8E407000BEDBBA /* Muckmuck */;
+			targetProxy = 3DDF4F512D8E407100BEDBBA /* PBXContainerItemProxy */;
+		};
+		3DDF4F5C2D8E407100BEDBBA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3DDF4F3F2D8E407000BEDBBA /* Muckmuck */;
+			targetProxy = 3DDF4F5B2D8E407100BEDBBA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		3DDF4F622D8E407100BEDBBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3DDF4F632D8E407100BEDBBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3DDF4F652D8E407100BEDBBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Muckmuck/Preview Content\"";
+				DEVELOPMENT_TEAM = XS9UN8F2AX;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youngtaek.Muckmuck;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3DDF4F662D8E407100BEDBBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Muckmuck/Preview Content\"";
+				DEVELOPMENT_TEAM = XS9UN8F2AX;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youngtaek.Muckmuck;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3DDF4F682D8E407100BEDBBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XS9UN8F2AX;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youngtaek.MuckmuckTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Muckmuck.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Muckmuck";
+			};
+			name = Debug;
+		};
+		3DDF4F692D8E407100BEDBBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XS9UN8F2AX;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youngtaek.MuckmuckTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Muckmuck.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Muckmuck";
+			};
+			name = Release;
+		};
+		3DDF4F6B2D8E407100BEDBBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XS9UN8F2AX;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youngtaek.MuckmuckUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Muckmuck;
+			};
+			name = Debug;
+		};
+		3DDF4F6C2D8E407100BEDBBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XS9UN8F2AX;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.youngtaek.MuckmuckUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Muckmuck;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3DDF4F3B2D8E407000BEDBBA /* Build configuration list for PBXProject "Muckmuck" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3DDF4F622D8E407100BEDBBA /* Debug */,
+				3DDF4F632D8E407100BEDBBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3DDF4F642D8E407100BEDBBA /* Build configuration list for PBXNativeTarget "Muckmuck" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3DDF4F652D8E407100BEDBBA /* Debug */,
+				3DDF4F662D8E407100BEDBBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3DDF4F672D8E407100BEDBBA /* Build configuration list for PBXNativeTarget "MuckmuckTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3DDF4F682D8E407100BEDBBA /* Debug */,
+				3DDF4F692D8E407100BEDBBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3DDF4F6A2D8E407100BEDBBA /* Build configuration list for PBXNativeTarget "MuckmuckUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3DDF4F6B2D8E407100BEDBBA /* Debug */,
+				3DDF4F6C2D8E407100BEDBBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3DDF4F382D8E407000BEDBBA /* Project object */;
+}
