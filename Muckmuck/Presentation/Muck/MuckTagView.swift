@@ -10,14 +10,15 @@ import SwiftUI
 struct MuckTagView: View {
     private let tag: MuckTag
     private let isMyTag: Bool
-    @State private var hadReactionBefore: Bool = false
+    private let hadReactionBefore: Bool // 내가 이전에 좋아요 눌렀던 태그인지
     
     @ObservedObject private var viewModel: MuckTagViewModel
     
-    init(tag: MuckTag, isMyTag: Bool = false, viewModel: MuckTagViewModel) {
+    init(tag: MuckTag, isMyTag: Bool = false, viewModel: MuckTagViewModel, hadReactionBefore: Bool) {
         self.tag = tag
         self.isMyTag = isMyTag
         self.viewModel = viewModel
+        self.hadReactionBefore = hadReactionBefore
     }
     
     var body: some View {
@@ -77,7 +78,8 @@ struct MuckTagView: View {
                     
                     HStack(alignment: .lastTextBaseline) {
                         Button {
-                            hadReactionBefore.toggle()
+                            guard !isMyTag else { return }
+                            viewModel.reactButtonTapped(muckTagId: tag.id)
                         } label: {
                             !hadReactionBefore
                             ? Image(systemName: "heart")
@@ -139,5 +141,5 @@ struct MuckTagView: View {
 }
 
 #Preview {
-    MuckTagView(tag: .dummyData.first!, viewModel: MuckTagViewModel())
+    MuckTagView(tag: .dummyData.first!, viewModel: MuckTagViewModel(), hadReactionBefore: false)
 }

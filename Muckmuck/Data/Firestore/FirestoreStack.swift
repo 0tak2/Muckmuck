@@ -109,6 +109,30 @@ final class FirestoreStack {
         }
     }
     
+    func getAllDocuments<T, S>(collectionId: String, field1: String, equalTo1: T, field2: String, equalTo2: S) async throws -> [[String: Any]] {
+        guard let db = db else {
+            logger.error("db가 초기화되지 않았습니다")
+            fatalError("db must be init!")
+        }
+        
+        do {
+            logger.debug("start getAllDocuments for \(collectionId)")
+            let snapshot = try await db.collection(collectionId)
+                .whereField(field1, isEqualTo: equalTo1)
+                .whereField(field2, isEqualTo: equalTo2)
+                .getDocuments()
+            return snapshot.documents.map { document in
+                var data = [String: Any]()
+                data["id"] = document.documentID
+                data.merge(document.data()) { (_, new) in new }
+                return data
+            }
+        } catch {
+            logger.error("Error getting documents: \(error)")
+            throw error
+        }
+    }
+    
     func getDocument(collectionId: String, documentId: String) async throws -> [String: Any] {
         guard let db = db else {
             logger.error("db가 초기화되지 않았습니다")
@@ -141,6 +165,21 @@ final class FirestoreStack {
         do {
             logger.debug("start setDocument to \(collectionId) for \(document)")
             try await db.collection(collectionId).document(id).setData(document)
+        } catch {
+            logger.error("Error writing documents: \(error)")
+            throw error
+        }
+    }
+    
+    func removeDocument(collectionId: String, documentId: String) async throws {
+        guard let db = db else {
+            logger.error("db가 초기화되지 않았습니다")
+            fatalError("db must be init!")
+        }
+        
+        do {
+            logger.debug("start removeDocument in \(collectionId) for \(documentId)")
+            try await db.collection(collectionId).document(documentId).delete()
         } catch {
             logger.error("Error writing documents: \(error)")
             throw error

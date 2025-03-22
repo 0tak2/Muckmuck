@@ -174,4 +174,44 @@ final class MuckTagViewModel: ObservableObject {
             await loadMuckTags()
         }
     }
+    
+    func myReactionExists(among reactions: [MuckReaction]) -> Bool {
+        guard let currentUser = currentUser else {
+            log.warning("currentUser is nil")
+            return false
+        }
+        
+        if let matched = reactions.first(where: { $0.createdBy == currentUser }) {
+            return true
+        }
+        return false
+    }
+    
+    func toggleReaction(muckTagId: UUID) async throws {
+        guard let currentUser = currentUser else {
+            log.error("currentUser must not be nil")
+            return
+        }
+        
+        do {
+            try await muckService.toggleReaction(userId: currentUser.id, muckTagId: muckTagId)
+        } catch {
+            await MainActor.run {
+                isError = true
+                
+                if let error = error as? MuckService.MuckServiceError {
+                    errorMessage = error.getUserMessage()
+                }
+            }
+        }
+    }
+    
+    func reactButtonTapped(muckTagId: UUID) {
+        isError = false
+        
+        Task {
+            try await toggleReaction(muckTagId: muckTagId)
+            await loadMuckTags()
+        }
+    }
 }

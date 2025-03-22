@@ -60,6 +60,26 @@ final class MuckService {
         }
     }
     
+    func saveReaction(reaction: MuckReaction, muckTagId: UUID) async throws {
+        do {
+            try await muckRepository.setMuckReaction(reaction, muckTagId: muckTagId)
+        } catch {
+            throw MuckServiceError.repositoryError(error)
+        }
+    }
+    
+    func toggleReaction(userId: UUID, muckTagId: UUID) async throws {
+        do {
+            let reaction = try await muckRepository.getMuckReaction(userId: userId, muckTagId: muckTagId)
+            
+            if let reaction = reaction {
+                try await muckRepository.removeMuckReaction(reaction)
+            } else {
+                try await muckRepository.setMuckReaction(MuckReaction(id: UUID(), createdBy: User(id: userId, nickname: "", contactInfo: ""), createdAt: Date()), muckTagId: muckTagId)
+            }
+        }
+    }
+    
     enum MuckServiceError: Error {
         case repositoryError(Error)
         case userIdInvalid

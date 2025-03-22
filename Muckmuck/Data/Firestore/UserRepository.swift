@@ -40,7 +40,7 @@ final class UserRepository {
                let contackInfo = userDictionary["contactInfo"] as? String {
                 return User (id: id, nickname: nickname, contactInfo: contackInfo)
             } else {
-                log.error("every fields not resolved")
+                log.error("every fields not resolved - getUser")
                 throw UserRepositoryError.fieldsNotResolved
             }
         } catch {

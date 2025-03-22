@@ -14,6 +14,7 @@ final class MuckRepository {
     
     private let userCollectionId = "users"
     private let muckTagCollectionId = "muckTags"
+    private let muckReactionCollectionId = "muckReactions"
     private let log = Logger.of("MuckTagRepository")
     
     func setMuckTag(_ muckTag: MuckTag) async throws {
@@ -57,7 +58,7 @@ final class MuckRepository {
                let contackInfo = userDictionary["contactInfo"] as? String {
                 return User (id: id, nickname: nickname, contactInfo: contackInfo)
             } else {
-                log.error("every fields not resolved")
+                log.error("every fields not resolved - MuckRepository getUser") // FIXME: Error nested
                 throw UserRepositoryError.fieldsNotResolved
             }
         } catch {
@@ -109,6 +110,82 @@ final class MuckRepository {
         }
     }
     
+    func setMuckReaction(_ muckReaction: MuckReaction, muckTagId: UUID) async throws {
+        do {
+            try await stack.setDocument(
+                for: [
+                    "createdBy": muckReaction.createdBy.id.uuidString,
+                    "createdAt": muckReaction.createdAt,
+                    "muckTagId": muckTagId.uuidString
+                ],
+                id: muckReaction.id.uuidString,
+                for: muckReactionCollectionId
+            )
+        } catch {
+            log.error("error from firestore: \(error)")
+            throw UserRepositoryError.firestoreError(error)
+        }
+    }
+    
+    func getMuckReactions(muckTagId: UUID) async throws -> [MuckReaction] {
+        do {
+            let dictionaries = try await stack.getAllDocuments(collectionId: muckReactionCollectionId, field: "muckTagId", equalTo: muckTagId.uuidString)
+            
+            var reactions: [MuckReaction] = []
+            for dict in dictionaries {
+                if let muckReaction = try await mapToMuckReaction(dict) {
+                    reactions.append(muckReaction)
+                }
+            }
+            
+            return reactions
+        } catch {
+            log.error("error from firestore: \(error)")
+            throw UserRepositoryError.firestoreError(error)
+        }
+    }
+    
+    func getMuckReaction(userId: UUID, muckTagId: UUID) async throws -> MuckReaction? {
+        do {
+            let dictionaries = try await stack.getAllDocuments(collectionId: muckReactionCollectionId, field1: "muckTagId", equalTo1: muckTagId.uuidString, field2: "createdBy", equalTo2: userId.uuidString)
+            
+            var reactions: [MuckReaction] = []
+            for dict in dictionaries {
+                if let muckReaction = try await mapToMuckReaction(dict) {
+                    reactions.append(muckReaction)
+                }
+            }
+            
+            return reactions.first
+        } catch {
+            log.error("error from firestore: \(error)")
+            throw UserRepositoryError.firestoreError(error)
+        }
+    }
+    
+    func removeMuckReaction(_ muckReaction: MuckReaction) async throws {
+        do {
+            try await stack.removeDocument(collectionId: muckReactionCollectionId, documentId: muckReaction.id.uuidString)
+        } catch {
+            log.error("error from firestore: \(error)")
+            throw UserRepositoryError.firestoreError(error)
+        }
+    }
+    
+    func mapToMuckReaction(_ dict: [String: Any]) async throws -> MuckReaction? {
+        if let idString = dict["id"] as? String,
+           let id = UUID(uuidString: idString),
+           let createdAtRaw = dict["createdAt"] as? Timestamp,
+           let createdUserIdRaw = dict["createdBy"] as? String,
+           let createdUserId = UUID(uuidString: createdUserIdRaw) {
+            let muckReaction = MuckReaction(id: id, createdBy: try await getUser(id: createdUserId), createdAt: createdAtRaw.dateValue())
+            return muckReaction
+        } else {
+            log.warning("every fields not resolved - mapToMuckReaction")
+            return nil
+        }
+    }
+    
     func mapToMuckTag(_ dict: [String: Any]) async throws -> MuckTag? {
         if let idString = dict["id"] as? String,
            let id = UUID(uuidString: idString),
@@ -119,10 +196,10 @@ final class MuckRepository {
            let createdUserIdRaw = dict["createdBy"] as? String,
            let createdUserId = UUID(uuidString: createdUserIdRaw),
            let isDeleted = dict["isDeleted"] as? Bool {
-            let muckTag = MuckTag(id: id, region: MuckRegion.from(localizedString: regionRaw), createdBy: try await getUser(id: createdUserId), createdAt: createdAtRaw.dateValue(), availableUntil: availableUntilRaw.dateValue(), type: MuckType(rawValue: muckTypeRaw) ?? .bob, reactions: [], isDeleted: isDeleted)
+            let muckTag = MuckTag(id: id, region: MuckRegion.from(localizedString: regionRaw), createdBy: try await getUser(id: createdUserId), createdAt: createdAtRaw.dateValue(), availableUntil: availableUntilRaw.dateValue(), type: MuckType(rawValue: muckTypeRaw) ?? .bob, reactions: try await getMuckReactions(muckTagId: id), isDeleted: isDeleted)
             return muckTag
         } else {
-            log.warning("every fields not resolved")
+            log.warning("every fields not resolved- mapToMuckTag")
             return nil
         }
     }
