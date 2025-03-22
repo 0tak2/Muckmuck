@@ -11,13 +11,16 @@ struct MuckTagListView: View {
     @State private var tags: [MuckTag] = MuckTag.dummyData
     
     var body: some View {
-        ScrollView {
-            LazyVStack(spacing: 4) {
-                ForEach(tags, id: \.self) { tag in
-                    MuckTagView(tag: tag, isMyTag: tag.createdBy.nickname == "Bob")
+        NavigationView {
+            ScrollView {
+                LazyVStack(spacing: 4) {
+                    ForEach(tags, id: \.self) { tag in
+                        MuckTagView(tag: tag, isMyTag: tag.createdBy.nickname == "Bob")
+                    }
                 }
+                .padding(8)
             }
-            .padding(8)
+            .navigationTitle("먹먹")
         }
     }
 }

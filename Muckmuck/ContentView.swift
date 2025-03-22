@@ -9,7 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        MuckTagListView()
+        TabView {
+            MuckTagListView()
+                .tabItem {
+                    Image(systemName: "fork.knife")
+                    Text("먹먹")
+                }
+            
+            SettingView()
+                .tabItem {
+                    Image(systemName: "gearshape.fill")
+                    Text("설정")
+                }
+        }
     }
 }
 
