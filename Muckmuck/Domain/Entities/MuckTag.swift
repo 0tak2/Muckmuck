@@ -8,16 +8,29 @@
 import Foundation
 
 struct MuckTag: Hashable {
+    let id: UUID
     let region: MuckRegion
     let createdBy: User
     let createdAt: Date
     let availableUntil: Date
     let type: MuckType
     let reactions: [MuckReaction]
-    let isDeleted: Bool = false
+    let isDeleted: Bool
+    
+    init(id: UUID, region: MuckRegion, createdBy: User, createdAt: Date, availableUntil: Date, type: MuckType, reactions: [MuckReaction], isDeleted: Bool = false) {
+        self.id = id
+        self.region = region
+        self.createdBy = createdBy
+        self.createdAt = createdAt
+        self.availableUntil = availableUntil
+        self.type = type
+        self.reactions = reactions
+        self.isDeleted = isDeleted
+    }
     
     static let dummyData: [MuckTag] = [
         .init(
+            id: UUID(),
             region: .hoyja,
             createdBy: User.dummyUserBob,
             createdAt: Date(),
@@ -29,6 +42,7 @@ struct MuckTag: Hashable {
             ]
         ),
         .init(
+            id: UUID(),
             region: .daeii,
             createdBy: User.dummyUserJoid,
             createdAt: Date(),
@@ -39,6 +53,7 @@ struct MuckTag: Hashable {
             ]
         ),
         .init(
+            id: UUID(),
             region: .ugang,
             createdBy: User.dummyUserLuke,
             createdAt: Date(),

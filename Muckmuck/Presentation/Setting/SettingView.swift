@@ -51,5 +51,5 @@ struct SettingView: View {
 
 #Preview {
     SettingView()
-        .environmentObject(SettingViewModel())
+        .environmentObject(UserProfileModel())
 }

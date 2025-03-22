@@ -7,10 +7,10 @@
 
 import Foundation
 
-enum MuckType: Hashable {
-    case bob
-    case cafe
-    case drink
+enum MuckType: String, Hashable {
+    case bob = "bob"
+    case cafe = "cafe"
+    case drink = "drink"
     
     func getEmoji() -> String {
         switch self {

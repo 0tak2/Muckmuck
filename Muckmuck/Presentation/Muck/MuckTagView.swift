@@ -91,6 +91,11 @@ struct MuckTagView: View {
                                 Text("- \(reaction.createdBy.nickname) (\(reaction.createdBy.contactInfo))")
                             }
                             .font(Fonts.small)
+                            
+                            if tag.reactions.isEmpty {
+                                Text("- 아직 리액션을 남긴 러너들이 없습니다.")
+                                    .font(Fonts.small)
+                            }
                         }
                     }
                 }
@@ -105,7 +110,7 @@ struct MuckTagView: View {
             VStack(alignment: .leading) {
                 Text(tag.region.getLocalizedString())
                 Text(tag.type.getLocalizedString())
-                Text(tag.availableUntil.description)
+                Text(tag.availableUntil.localizedString)
             }
             .font(Fonts.medium)
         }
