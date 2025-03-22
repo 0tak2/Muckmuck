@@ -94,7 +94,9 @@ final class MuckTagViewModel: ObservableObject {
     }
     
     func saveMuckTag() async {
-        guard let currentUser = currentUser else { return }
+        guard let currentUser = currentUser else {
+            return
+        }
         
         let saveId: UUID
         if let editingMuckTagId = editingMuckTagId {
@@ -135,6 +137,10 @@ final class MuckTagViewModel: ObservableObject {
     }
     
     func saveButtonTapped() {
+        guard checkNickname() else {
+            return
+        }
+        
         isError = false
         
         Task {
@@ -181,7 +187,7 @@ final class MuckTagViewModel: ObservableObject {
             return false
         }
         
-        if let matched = reactions.first(where: { $0.createdBy == currentUser }) {
+        if let _ = reactions.first(where: { $0.createdBy == currentUser }) {
             return true
         }
         return false
@@ -213,5 +219,16 @@ final class MuckTagViewModel: ObservableObject {
             try await toggleReaction(muckTagId: muckTagId)
             await loadMuckTags()
         }
+    }
+    
+    func checkNickname() -> Bool {
+        if let currentUser = currentUser,
+           currentUser.nickname == "" {
+            isError = true
+            errorMessage = "현재 닉네임이 설정되어 있지 않습니다. 설정에서 닉네임을 지정해주세요."
+            return false
+        }
+        
+        return true
     }
 }

@@ -37,9 +37,11 @@ struct SettingView: View {
                 }
             }
             .alert("저장이 완료되었습니다.", isPresented: $settingViewModel.showCompleteAlert) {
-                Button("확인", role: .cancel) { }
+                Button("확인", role: .cancel) {
+                    userProfileModel.settingNeeded = false
+                }
             }
-            .alert("오류가 발생했습니다.", isPresented: $settingViewModel.isError) {
+            .alert(settingViewModel.errorMessage, isPresented: $settingViewModel.isError) {
                 Button("확인", role: .cancel) { }
             }
         }

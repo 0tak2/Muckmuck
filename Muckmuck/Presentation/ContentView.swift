@@ -9,21 +9,24 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var userProfileModel = UserProfileModel()
+    @State private var currentTabIndex = 0
     
     var body: some View {
-        TabView {
+        TabView(selection: $currentTabIndex) {
             MuckTagListView()
                 .tabItem {
                     Image(systemName: "fork.knife")
                     Text("먹먹")
                 }
+                .tag(0)
             
             SettingView()
+                .environmentObject(userProfileModel)
                 .tabItem {
                     Image(systemName: "gearshape.fill")
                     Text("설정")
                 }
-                .environmentObject(userProfileModel)
+                .tag(1)
         }
         .onAppear {
             userProfileModel.onAppeared()
@@ -31,6 +34,11 @@ struct ContentView: View {
         .sheet(isPresented: $userProfileModel.onboardingNeeded) {
             OnboardingView()
                 .environmentObject(userProfileModel)
+        }
+        .onChange(of: userProfileModel.settingNeeded) { _, currentValue in
+            if currentValue {
+                currentTabIndex = 1
+            }
         }
     }
 }

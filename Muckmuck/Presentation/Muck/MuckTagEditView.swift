@@ -36,6 +36,9 @@ struct MuckTagEditView: View {
                 Button("확인", role: .cancel) { }
             }
         }
+        .onAppear {
+            viewModel.checkNickname()
+        }
     }
 }
 

@@ -20,6 +20,7 @@ final class UserProfileModel: ObservableObject {
     
     @Published var onboardingNeeded = false
     @Published var currentUser: User?
+    @Published var settingNeeded = false
     
     func onAppeared() {
         onboardingNeeded = !userService.getUserOnboardingCompleted()
@@ -51,6 +52,7 @@ final class UserProfileModel: ObservableObject {
                 await MainActor.run {
                     currentUser = userEntity
                     onboardingNeeded = false
+                    settingNeeded = true
                 }
             } catch {
                 log.error("create user failed...")

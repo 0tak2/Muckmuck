@@ -18,6 +18,7 @@ final class SettingViewModel: ObservableObject {
     @Published var editingUserNickname: String = ""
     @Published var editingUserContactInfo: String = ""
     @Published var isError: Bool = false
+    @Published var errorMessage: String = "오류가 발생했습니다."
     @Published var showCompleteAlert: Bool = false
     
     func onAppear() {
@@ -35,7 +36,14 @@ final class SettingViewModel: ObservableObject {
     }
     
     func save() {
+        guard editingUserNickname != "" else {
+            isError = true
+            errorMessage = "닉네임은 공백일 수 없습니다."
+            return
+        }
+        
         isError = false
+        errorMessage = "오류가 발생했습니다."
         
         Task {
             do {
