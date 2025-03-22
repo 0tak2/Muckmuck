@@ -8,8 +8,17 @@
 import SwiftUI
 
 struct MuckTagListView: View {
+    @State private var tags: [MuckTag] = MuckTag.dummyData
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            LazyVStack(spacing: 4) {
+                ForEach(tags, id: \.self) { tag in
+                    MuckTagView(tag: tag, isMyTag: tag.createdBy.nickname == "Bob")
+                }
+            }
+            .padding(8)
+        }
     }
 }
 

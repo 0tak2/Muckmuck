@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MuckRegion {
+enum MuckRegion: Hashable {
     case hoyja
     case ugang
     case daejam

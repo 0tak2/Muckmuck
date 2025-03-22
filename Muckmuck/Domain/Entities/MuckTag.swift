@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MuckTag {
+struct MuckTag: Hashable {
     let region: MuckRegion
     let createdBy: User
     let createdAt: Date
@@ -24,7 +24,8 @@ struct MuckTag {
             availableUntil: Date(),
             type: .bob,
             reactions: [
-                .init(id: UUID(), createdBy: User.dummyUserJoid, createdAt: Date())
+                .init(id: UUID(), createdBy: User.dummyUserJoid, createdAt: Date()),
+                .init(id: UUID(), createdBy: User.dummyUserLuke, createdAt: Date())
             ]
         ),
         .init(
@@ -34,6 +35,17 @@ struct MuckTag {
             availableUntil: Date(),
             type: .drink,
             reactions: [
+                .init(id: UUID(), createdBy: User.dummyUserBob, createdAt: Date())
+            ]
+        ),
+        .init(
+            region: .ugang,
+            createdBy: User.dummyUserLuke,
+            createdAt: Date(),
+            availableUntil: Date(),
+            type: .cafe,
+            reactions: [
+                .init(id: UUID(), createdBy: User.dummyUserJoid, createdAt: Date()),
                 .init(id: UUID(), createdBy: User.dummyUserBob, createdAt: Date())
             ]
         )

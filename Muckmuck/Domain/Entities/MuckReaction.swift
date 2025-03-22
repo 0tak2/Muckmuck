@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MuckReaction {
+struct MuckReaction: Hashable {
     let id: UUID
     let createdBy: User
     let createdAt: Date
