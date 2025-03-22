@@ -13,6 +13,7 @@ final class MuckTagViewModel: ObservableObject {
     private let userService: UserService
     private let log = Logger.of("MuckTagViewModel")
     
+    // MARK: Common
     @Published var muckTags: [MuckTag] = []
     @Published var isLoading: Bool = false
     @Published var isError: Bool = false
@@ -20,11 +21,16 @@ final class MuckTagViewModel: ObservableObject {
     @Published var currentUser: User?
     @Published var myMuckTag: MuckTag?
     
+    // MARK: Editing
+    @Published var editingMuckTagId: UUID?
     @Published var editingSheetShow: Bool = false
     @Published var editingRegion: MuckRegion = .hoyja
     @Published var editingTagType: MuckType = .bob
     @Published var editingTagMeetAt = Date()
     @Published var otherRegionFieldShow = false
+    
+    // MARK: Cell
+    @Published var showDropDownMenu: Bool = false
     
     init(
         muckService: MuckService = MuckService.shared,
@@ -59,9 +65,6 @@ final class MuckTagViewModel: ObservableObject {
             let tags = try await muckService.getValidMuckTags()
                 .filter { $0 != myTag }
             
-            print(myTag)
-            print(tags)
-            
             await MainActor.run {
                 myMuckTag = myTag
                 muckTags = tags
@@ -93,11 +96,33 @@ final class MuckTagViewModel: ObservableObject {
     func saveMuckTag() async {
         guard let currentUser = currentUser else { return }
         
+        let saveId: UUID
+        if let editingMuckTagId = editingMuckTagId {
+            saveId = editingMuckTagId
+        } else {
+            saveId = UUID()
+        }
+        
         do {
-            try await muckService.addNewMuckTag(MuckTag(id: UUID(), region: editingRegion, createdBy: currentUser, createdAt: Date(), availableUntil: editingTagMeetAt, type: editingTagType, reactions: []))
+            try await muckService.saveMuckTag(MuckTag(id: saveId, region: editingRegion, createdBy: currentUser, createdAt: Date(), availableUntil: editingTagMeetAt, type: editingTagType, reactions: []))
         } catch {
             await MainActor.run {
                 isError = true
+                if let error = error as? MuckService.MuckServiceError {
+                    errorMessage = error.getUserMessage()
+                }
+            }
+        }
+    }
+    
+    func removeMuckTag(_ muckTagId: UUID) async {
+        do {
+            try await muckService.deleteMuckTag(id: muckTagId)
+            await loadMuckTags()
+        } catch {
+            await MainActor.run {
+                isError = true
+                
                 if let error = error as? MuckService.MuckServiceError {
                     errorMessage = error.getUserMessage()
                 }
@@ -118,6 +143,7 @@ final class MuckTagViewModel: ObservableObject {
             
             if !isError {
                 await MainActor.run {
+                    editingMuckTagId = nil
                     editingRegion = .hoyja
                     editingTagType = .bob
                     editingTagMeetAt = Date()
@@ -126,4 +152,19 @@ final class MuckTagViewModel: ObservableObject {
             }
         }
     }
+    
+    func editButtonTapped(muckTagId: UUID) {
+        editingSheetShow = true
+        editingMuckTagId = muckTagId
+    }
+    
+    func removeButtonTapped(muckTagId: UUID) {
+        isError = false
+        
+        Task {
+            await removeMuckTag(muckTagId)
+            await loadMuckTags()
+        }
+    }
+    
 }

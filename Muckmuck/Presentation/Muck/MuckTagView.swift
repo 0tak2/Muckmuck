@@ -12,9 +12,12 @@ struct MuckTagView: View {
     private let isMyTag: Bool
     @State private var hadReactionBefore: Bool = false
     
-    init(tag: MuckTag, isMyTag: Bool = false) {
+    @ObservedObject private var viewModel: MuckTagViewModel
+    
+    init(tag: MuckTag, isMyTag: Bool = false, viewModel: MuckTagViewModel) {
         self.tag = tag
         self.isMyTag = isMyTag
+        self.viewModel = viewModel
     }
     
     var body: some View {
@@ -47,21 +50,30 @@ struct MuckTagView: View {
                         if isMyTag {
                             Spacer()
                             
-                            Button {
-                                
+                            Menu {
+                                Button {
+                                    viewModel.editButtonTapped(muckTagId: tag.id)
+                                } label: {
+                                    Text("수정")
+                                }
+
+                                Button {
+                                    viewModel.removeButtonTapped(muckTagId: tag.id)
+                                } label: {
+                                    Text("삭제")
+                                }
                             } label: {
                                 Image(systemName: "ellipsis")
                                     .foregroundStyle(Colors.black)
                                     .frame(width: 32, height: 32)
                             }
                             .padding(.trailing, 8)
-
                         }
                     }
                     .padding(.bottom, 4)
                     
                     muckTagContent
-                    .padding(.bottom, 16)
+                        .padding(.bottom, 16)
                     
                     HStack(alignment: .lastTextBaseline) {
                         Button {
@@ -75,7 +87,7 @@ struct MuckTagView: View {
                                 .renderingMode(.template)
                                 .foregroundStyle(.red)
                         }
-
+                        
                         Text(String(tag.reactions.count))
                             .font(Fonts.small)
                     }
@@ -127,5 +139,5 @@ struct MuckTagView: View {
 }
 
 #Preview {
-    MuckTagView(tag: .dummyData.first!)
+    MuckTagView(tag: .dummyData.first!, viewModel: MuckTagViewModel())
 }

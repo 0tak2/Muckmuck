@@ -18,13 +18,23 @@ final class MuckService {
         self.muckRepository = muckRepository
     }
     
-    func addNewMuckTag(_ muckTag: MuckTag) async throws {
+    // FIXME: 내가 소유하지 않은 엔티티를 업데이트하는 경우 방지
+    func saveMuckTag(_ muckTag: MuckTag) async throws {
         if muckTag.availableUntil < Date() {
             throw MuckServiceError.availableDateInvalid
         }
         
         do {
             try await muckRepository.setMuckTag(muckTag)
+        } catch {
+            throw MuckServiceError.repositoryError(error)
+        }
+    }
+    
+    // FIXME: 내가 소유하지 않은 엔티티를 삭제하는 경우 방지
+    func deleteMuckTag(id: UUID) async throws {
+        do {
+            try await muckRepository.deleteMuckTag(id)
         } catch {
             throw MuckServiceError.repositoryError(error)
         }

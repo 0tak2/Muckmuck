@@ -15,12 +15,12 @@ struct MuckTagListView: View {
             ScrollView {
                 LazyVStack(spacing: 4) {
                     if let myMuckTag = viewModel.myMuckTag {
-                        MuckTagView(tag: myMuckTag, isMyTag: true)
+                        MuckTagView(tag: myMuckTag, isMyTag: true, viewModel: viewModel)
                     }
                     
                     if !viewModel.muckTags.isEmpty || viewModel.myMuckTag != nil {
                         ForEach(viewModel.muckTags, id: \.self) { tag in
-                            MuckTagView(tag: tag, isMyTag: false)
+                            MuckTagView(tag: tag, isMyTag: false, viewModel: viewModel)
                         }
                     } else {
                         Spacer()
@@ -29,6 +29,9 @@ struct MuckTagListView: View {
                     }
                 }
                 .padding(8)
+            }
+            .refreshable {
+                viewModel.refresh()
             }
             .navigationTitle("먹먹")
             .toolbar {

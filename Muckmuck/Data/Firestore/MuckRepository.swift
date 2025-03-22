@@ -36,6 +36,18 @@ final class MuckRepository {
         }
     }
     
+    func deleteMuckTag(_ muckTagId: UUID) async throws {
+        do {
+            var dict = try await stack.getDocument(collectionId: muckTagCollectionId, documentId: muckTagId.uuidString)
+            dict["isDeleted"] = true
+            
+            try await stack.setDocument(for: dict, id: muckTagId.uuidString, for: muckTagCollectionId)
+        } catch {
+            log.error("error from firestore: \(error)")
+            throw UserRepositoryError.firestoreError(error)
+        }
+    }
+    
     func getUser(id: UUID) async throws -> User {
         do {
             let userDictionary = try await stack.getDocument(collectionId: userCollectionId, documentId: id.uuidString)
