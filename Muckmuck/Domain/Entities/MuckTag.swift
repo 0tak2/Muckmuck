@@ -28,10 +28,11 @@ struct MuckTag: Hashable {
         self.isDeleted = isDeleted
     }
     
+#if DEBUG
     static let dummyData: [MuckTag] = [
         .init(
             id: UUID(),
-            region: .hoyja,
+            region: .hyoja,
             createdBy: User.dummyUserBob,
             createdAt: Date(),
             availableUntil: Date(),
@@ -65,4 +66,5 @@ struct MuckTag: Hashable {
             ]
         )
     ]
+#endif
 }

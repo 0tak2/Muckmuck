@@ -8,9 +8,9 @@
 import Foundation
 
 enum MuckRegion: Hashable, CaseIterable {
-    static var allCases: [MuckRegion] = [.hoyja, .ugang, .daejam, .daeii, .zugdo, .other("기타")]
+    static var allCases: [MuckRegion] = [.hyoja, .ugang, .daejam, .daeii, .zugdo, .other("기타")]
     
-    case hoyja
+    case hyoja
     case ugang
     case daejam
     case daeii
@@ -19,7 +19,7 @@ enum MuckRegion: Hashable, CaseIterable {
     
     func getLocalizedString() -> String {
         switch self {
-        case .hoyja:
+        case .hyoja:
             return "효자"
         case .ugang:
             return "유강"
@@ -37,7 +37,7 @@ enum MuckRegion: Hashable, CaseIterable {
     static func from(localizedString: String) -> MuckRegion {
         switch localizedString {
         case "효자":
-            return .hoyja
+            return .hyoja
         case "유강":
             return .ugang
         case "대잠":

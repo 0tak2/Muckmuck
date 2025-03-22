@@ -24,7 +24,7 @@ final class MuckTagViewModel: ObservableObject {
     // MARK: Editing
     @Published var editingMuckTagId: UUID?
     @Published var editingSheetShow: Bool = false
-    @Published var editingRegion: MuckRegion = .hoyja
+    @Published var editingRegion: MuckRegion = .hyoja
     @Published var editingTagType: MuckType = .bob
     @Published var editingTagMeetAt = Date()
     @Published var otherRegionFieldShow = false
@@ -150,7 +150,7 @@ final class MuckTagViewModel: ObservableObject {
             if !isError {
                 await MainActor.run {
                     editingMuckTagId = nil
-                    editingRegion = .hoyja
+                    editingRegion = .hyoja
                     editingTagType = .bob
                     editingTagMeetAt = Date()
                     editingSheetShow = false
