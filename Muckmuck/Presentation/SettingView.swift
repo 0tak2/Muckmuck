@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct SettingView: View {
-    @State private var nickname: String = ""
-    @State private var contactInfo: String = ""
+    @EnvironmentObject private var userProfileModel: UserProfileModel
+    @StateObject private var settingViewModel = SettingViewModel()
     
     var body: some View {
         NavigationView {
             Form {
                 Section {
-                    TextField("닉네임", text: $nickname)
-                    TextField("연락 방법", text: $contactInfo)
+                    TextField("닉네임", text: $settingViewModel.editingUserNickname)
+                    TextField("연락 방법", text: $settingViewModel.editingUserContactInfo)
                 }
                 
                 Section {
                     Text("유저 고유ID")
-                    TextField("유저 고유ID", text: .constant(String(UUID().uuidString.split(separator: "-").first ?? "")))
+                    Text(userProfileModel.currentUser?.id.uuidString.split(separator: "-").first ?? "")
                 }
                 
                 Section {
@@ -31,20 +31,25 @@ struct SettingView: View {
             .navigationTitle("설정")
             .toolbar {
                 Button {
-                    endEditing()
+                    settingViewModel.saveButtonTapped()
                 } label: {
                     Text("저장")
                 }
-
+            }
+            .alert("저장이 완료되었습니다.", isPresented: $settingViewModel.showCompleteAlert) {
+                Button("확인", role: .cancel) { }
+            }
+            .alert("오류가 발생했습니다.", isPresented: $settingViewModel.isError) {
+                Button("확인", role: .cancel) { }
             }
         }
-    }
-    
-    private func endEditing() {
-        UIApplication.shared.endEditing()
+        .onAppear {
+            settingViewModel.onAppear()
+        }
     }
 }
 
 #Preview {
     SettingView()
+        .environmentObject(SettingViewModel())
 }

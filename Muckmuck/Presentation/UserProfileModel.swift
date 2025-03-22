@@ -6,19 +6,23 @@
 //
 
 import Foundation
+import os.log
 
 final class UserProfileModel: ObservableObject {
-    private let userDefaultsService: UserDefaultsService
+    private let userService: UserService
+    private let log = Logger.of("UserProfileModel")
     
-    init(userDefaultsService: UserDefaultsService = UserDefaultsService.shared) {
-        self.userDefaultsService = userDefaultsService
+    init(
+        userService: UserService = UserService.shared
+    ) {
+        self.userService = userService
     }
     
     @Published var onboardingNeeded = false
     @Published var currentUser: User?
     
     func onAppeared() {
-        onboardingNeeded = !userDefaultsService.getUserOnboardingCompleted()
+        onboardingNeeded = !userService.getUserOnboardingCompleted()
         
         if !onboardingNeeded {
             loadUserProfile()
@@ -26,19 +30,31 @@ final class UserProfileModel: ObservableObject {
     }
     
     func loadUserProfile() {
-        guard let userId = userDefaultsService.getUserId() else {
+        guard let userId = userService.getUserId() else {
             onboardingNeeded = true
             return
         }
         
-        // TODO: Get user info by userId
-        
-        currentUser = User(id: userId, nickname: "닉네임", contactInfo: "팀즈")
+        Task {
+            let userEntity = try await userService.getCurrentUser()
+            await MainActor.run {
+                currentUser = userEntity
+            }
+        }
     }
     
     func onboardingComplete() {
-        userDefaultsService.setUserId(UUID())
-        userDefaultsService.setUserOnboardingCompleted(true)
-        onboardingNeeded = false
+        Task {
+            do {
+                let userEntity = try await userService.createNewUser()
+                
+                await MainActor.run {
+                    currentUser = userEntity
+                    onboardingNeeded = false
+                }
+            } catch {
+                log.error("create user failed...")
+            }
+        }
     }
 }

@@ -23,6 +23,7 @@ struct ContentView: View {
                     Image(systemName: "gearshape.fill")
                     Text("설정")
                 }
+                .environmentObject(userProfileModel)
         }
         .onAppear {
             userProfileModel.onAppeared()
