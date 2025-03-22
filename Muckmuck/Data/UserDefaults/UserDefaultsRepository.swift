@@ -35,7 +35,7 @@ final class UserDefaultsRepository {
     }
     
     enum UserDefaultsEntry: String {
-        case userId = "userId"
+        case userId = "userId" // Obsolete - Do Not Use. Use Auth Repository.
         case onboardingCompleted = "onboardingCompleted"
         
         func getType() -> Any.Type {

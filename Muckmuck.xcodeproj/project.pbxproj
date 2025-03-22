@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D5AED3A2D8F705F009BC1CA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 3D5AED392D8F705F009BC1CA /* FirebaseAuth */; };
 		3DDF4F9E2D8E8FBF00BEDBBA /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3DDF4F9D2D8E8FBF00BEDBBA /* FirebaseAnalytics */; };
 		3DDF4FA02D8E8FBF00BEDBBA /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3DDF4F9F2D8E8FBF00BEDBBA /* FirebaseFirestore */; };
 		3DDF4FA22D8E8FBF00BEDBBA /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 3DDF4FA12D8E8FBF00BEDBBA /* FirebaseFunctions */; };
@@ -60,6 +61,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DDF4FA42D8E8FBF00BEDBBA /* FirebaseMessaging in Frameworks */,
+				3D5AED3A2D8F705F009BC1CA /* FirebaseAuth in Frameworks */,
 				3DDF4FA22D8E8FBF00BEDBBA /* FirebaseFunctions in Frameworks */,
 				3DDF4F9E2D8E8FBF00BEDBBA /* FirebaseAnalytics in Frameworks */,
 				3DDF4FA02D8E8FBF00BEDBBA /* FirebaseFirestore in Frameworks */,
@@ -127,6 +129,7 @@
 				3DDF4F9F2D8E8FBF00BEDBBA /* FirebaseFirestore */,
 				3DDF4FA12D8E8FBF00BEDBBA /* FirebaseFunctions */,
 				3DDF4FA32D8E8FBF00BEDBBA /* FirebaseMessaging */,
+				3D5AED392D8F705F009BC1CA /* FirebaseAuth */,
 			);
 			productName = Muckmuck;
 			productReference = 3DDF4F402D8E407000BEDBBA /* Muckmuck.app */;
@@ -429,6 +432,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.youngtaek.Muckmuck;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -459,6 +463,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.youngtaek.Muckmuck;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -592,6 +597,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3D5AED392D8F705F009BC1CA /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3DDF4F9C2D8E8FBF00BEDBBA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
 		3DDF4F9D2D8E8FBF00BEDBBA /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3DDF4F9C2D8E8FBF00BEDBBA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

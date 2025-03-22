@@ -30,7 +30,9 @@ final class SettingViewModel: ObservableObject {
                     editingUserContactInfo = user.contactInfo
                 }
             } catch {
-                isError = true
+                await MainActor.run {
+                    isError = true
+                }
             }
         }
     }
@@ -61,7 +63,7 @@ final class SettingViewModel: ObservableObject {
         save()
     }
     
-    private func endEditing() {
+    func endEditing() {
         UIApplication.shared.endEditing()
     }
 }

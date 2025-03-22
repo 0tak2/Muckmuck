@@ -21,7 +21,7 @@ final class UserRepository {
                     "nickname": user.nickname,
                     "contactInfo": user.contactInfo
                 ],
-                id: user.id.uuidString,
+                id: user.id,
                 for: collectionId
             )
         } catch {
@@ -30,12 +30,11 @@ final class UserRepository {
         }
     }
     
-    func getUser(id: UUID) async throws -> User {
+    func getUser(id: String) async throws -> User {
         do {
-            let userDictionary = try await stack.getDocument(collectionId: collectionId, documentId: id.uuidString)
+            let userDictionary = try await stack.getDocument(collectionId: collectionId, documentId: id)
             
-            if let idString = userDictionary["id"] as? String,
-               let id = UUID(uuidString: idString),
+            if let id = userDictionary["id"] as? String,
                let nickname = userDictionary["nickname"] as? String,
                let contackInfo = userDictionary["contactInfo"] as? String {
                 return User (id: id, nickname: nickname, contactInfo: contackInfo)

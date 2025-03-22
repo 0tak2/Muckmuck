@@ -40,7 +40,7 @@ final class MuckService {
         }
     }
     
-    func getMuckTag(of userId: UUID) async throws -> [MuckTag] {
+    func getMuckTag(of userId: String) async throws -> [MuckTag] {
         do {
             let result = try await muckRepository.getMuckTag(of: userId)
             if result.count > 1 {
@@ -68,7 +68,7 @@ final class MuckService {
         }
     }
     
-    func toggleReaction(userId: UUID, muckTagId: UUID) async throws {
+    func toggleReaction(userId: String, muckTagId: UUID) async throws {
         do {
             let reaction = try await muckRepository.getMuckReaction(userId: userId, muckTagId: muckTagId)
             

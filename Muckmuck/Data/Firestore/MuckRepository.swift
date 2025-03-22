@@ -22,7 +22,7 @@ final class MuckRepository {
             try await stack.setDocument(
                 for: [
                     "region": muckTag.region.getLocalizedString(),
-                    "createdBy": muckTag.createdBy.id.uuidString,
+                    "createdBy": muckTag.createdBy.id,
                     "createdAt": muckTag.createdAt,
                     "availableUntil": muckTag.availableUntil,
                     "type": muckTag.type.rawValue,
@@ -49,16 +49,16 @@ final class MuckRepository {
         }
     }
     
-    func getUser(id: UUID) async throws -> User {
+    func getUser(id: String) async throws -> User {
         do {
-            let userDictionary = try await stack.getDocument(collectionId: userCollectionId, documentId: id.uuidString)
-            if let idString = userDictionary["id"] as? String,
-               let id = UUID(uuidString: idString),
+            let userDictionary = try await stack.getDocument(collectionId: userCollectionId, documentId: id)
+            
+            if let id = userDictionary["id"] as? String,
                let nickname = userDictionary["nickname"] as? String,
                let contackInfo = userDictionary["contactInfo"] as? String {
                 return User (id: id, nickname: nickname, contactInfo: contackInfo)
             } else {
-                log.error("every fields not resolved - MuckRepository getUser") // FIXME: Error nested
+                log.error("every fields not resolved - getUser")
                 throw UserRepositoryError.fieldsNotResolved
             }
         } catch {
@@ -90,11 +90,11 @@ final class MuckRepository {
         }
     }
     
-    func getMuckTag(of userId: UUID, validOnly: Bool = true) async throws -> [MuckTag] {
+    func getMuckTag(of userId: String, validOnly: Bool = true) async throws -> [MuckTag] {
         do {
             let muckTagDictionaries = validOnly
-            ? try await stack.getAllDocuments(collectionId: muckTagCollectionId, field1: "isDeleted", equalTo1: false, field2: "createdBy", equalTo2: userId.uuidString, field3: "availableUntil", greaterThan: Date())
-            : try await stack.getAllDocuments(collectionId: muckTagCollectionId, field: "createdBy", equalTo: userId.uuidString)
+            ? try await stack.getAllDocuments(collectionId: muckTagCollectionId, field1: "isDeleted", equalTo1: false, field2: "createdBy", equalTo2: userId, field3: "availableUntil", greaterThan: Date())
+            : try await stack.getAllDocuments(collectionId: muckTagCollectionId, field: "createdBy", equalTo: userId)
             
             var muckTags: [MuckTag] = []
             for dict in muckTagDictionaries {
@@ -114,7 +114,7 @@ final class MuckRepository {
         do {
             try await stack.setDocument(
                 for: [
-                    "createdBy": muckReaction.createdBy.id.uuidString,
+                    "createdBy": muckReaction.createdBy.id,
                     "createdAt": muckReaction.createdAt,
                     "muckTagId": muckTagId.uuidString
                 ],
@@ -145,9 +145,9 @@ final class MuckRepository {
         }
     }
     
-    func getMuckReaction(userId: UUID, muckTagId: UUID) async throws -> MuckReaction? {
+    func getMuckReaction(userId: String, muckTagId: UUID) async throws -> MuckReaction? {
         do {
-            let dictionaries = try await stack.getAllDocuments(collectionId: muckReactionCollectionId, field1: "muckTagId", equalTo1: muckTagId.uuidString, field2: "createdBy", equalTo2: userId.uuidString)
+            let dictionaries = try await stack.getAllDocuments(collectionId: muckReactionCollectionId, field1: "muckTagId", equalTo1: muckTagId.uuidString, field2: "createdBy", equalTo2: userId)
             
             var reactions: [MuckReaction] = []
             for dict in dictionaries {
@@ -176,8 +176,7 @@ final class MuckRepository {
         if let idString = dict["id"] as? String,
            let id = UUID(uuidString: idString),
            let createdAtRaw = dict["createdAt"] as? Timestamp,
-           let createdUserIdRaw = dict["createdBy"] as? String,
-           let createdUserId = UUID(uuidString: createdUserIdRaw) {
+           let createdUserId = dict["createdBy"] as? String {
             let muckReaction = MuckReaction(id: id, createdBy: try await getUser(id: createdUserId), createdAt: createdAtRaw.dateValue())
             return muckReaction
         } else {
@@ -193,8 +192,7 @@ final class MuckRepository {
            let createdAtRaw = dict["createdAt"] as? Timestamp,
            let availableUntilRaw = dict["availableUntil"] as? Timestamp,
            let muckTypeRaw = dict["type"] as? String,
-           let createdUserIdRaw = dict["createdBy"] as? String,
-           let createdUserId = UUID(uuidString: createdUserIdRaw),
+           let createdUserId = dict["createdBy"] as? String,
            let isDeleted = dict["isDeleted"] as? Bool {
             let muckTag = MuckTag(id: id, region: MuckRegion.from(localizedString: regionRaw), createdBy: try await getUser(id: createdUserId), createdAt: createdAtRaw.dateValue(), availableUntil: availableUntilRaw.dateValue(), type: MuckType(rawValue: muckTypeRaw) ?? .bob, reactions: try await getMuckReactions(muckTagId: id), isDeleted: isDeleted)
             return muckTag

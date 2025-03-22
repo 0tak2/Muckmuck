@@ -21,7 +21,7 @@ struct SettingView: View {
                 
                 Section {
                     Text("유저 고유ID")
-                    Text(userProfileModel.currentUser?.id.uuidString.split(separator: "-").first ?? "")
+                    Text(userProfileModel.currentUser?.id ?? "Invalid")
                 }
                 
                 Section {
@@ -39,6 +39,7 @@ struct SettingView: View {
             .alert("저장이 완료되었습니다.", isPresented: $settingViewModel.showCompleteAlert) {
                 Button("확인", role: .cancel) {
                     userProfileModel.settingNeeded = false
+                    settingViewModel.endEditing()
                 }
             }
             .alert(settingViewModel.errorMessage, isPresented: $settingViewModel.isError) {

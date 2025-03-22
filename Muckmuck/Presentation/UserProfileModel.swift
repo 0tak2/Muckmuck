@@ -31,7 +31,7 @@ final class UserProfileModel: ObservableObject {
     }
     
     func loadUserProfile() {
-        guard let _ = userService.getUserId() else {
+        guard userService.getUserOnboardingCompleted() else {
             onboardingNeeded = true
             return
         }

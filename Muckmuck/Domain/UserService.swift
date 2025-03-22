@@ -8,18 +8,21 @@
 import Foundation
 
 final class UserService {
+    let authRepository: AuthRepository
     let userRepository: UserRepository
     let defaultsRepository: UserDefaultsRepository
     
     init(
+        authRepository: AuthRepository,
         userRepository: UserRepository,
         defaultsRepository: UserDefaultsRepository
     ) {
+        self.authRepository = authRepository
         self.userRepository = userRepository
         self.defaultsRepository = defaultsRepository
     }
     
-    static let shared = UserService(userRepository: UserRepository(), defaultsRepository: UserDefaultsRepository())
+    static let shared = UserService(authRepository: AuthRepository(), userRepository: UserRepository(), defaultsRepository: UserDefaultsRepository())
     
     func getUserOnboardingCompleted() -> Bool {
         return defaultsRepository.get(.onboardingCompleted) ?? false
@@ -29,43 +32,44 @@ final class UserService {
         defaultsRepository.write(.onboardingCompleted, value)
     }
     
-    func getUserId() -> UUID? {
-        return UUID(uuidString: defaultsRepository.get(.userId) ?? "")
-    }
-    
     func getCurrentUser() async throws -> User {
-        guard let userId = getUserId() else {
+        guard let userId = try await authRepository.login() else {
             throw UserServiceError.userIdInvalid
         }
         
         return try await getUserFromRemote(id: userId)
     }
     
-    private func getUserFromRemote(id: UUID) async throws -> User {
+    private func getUserFromRemote(id: String) async throws -> User {
         try await userRepository.getUser(id: id)
     }
     
     func createNewUser(nickname: String = "", contactInfo: String = "팀즈로 연락해주세요") async throws -> User {
-        let id = UUID()
-        setUserId(id)
-        
         do {
+            guard let id = try await authRepository.login() else {
+                throw UserServiceError.userIdInvalid
+            }
+            
             try await setUserToRemote(User(id: id, nickname: nickname, contactInfo: contactInfo))
             setUserOnboardingCompleted(true)
             return User(id: id, nickname: nickname, contactInfo: contactInfo)
+        } catch let error as UserServiceError {
+            throw error
         } catch {
             throw UserServiceError.repositoryError(error)
         }
     }
     
     func updateUser(nickname: String, contactInfo: String) async throws -> User {
-        guard let id = getUserId() else {
-            throw UserServiceError.userIdInvalid
-        }
-        
         do {
+            guard let id = try await authRepository.login() else {
+                throw UserServiceError.userIdInvalid
+            }
+            
             try await setUserToRemote(User(id: id, nickname: nickname, contactInfo: contactInfo))
             return User(id: id, nickname: nickname, contactInfo: contactInfo)
+        } catch let error as UserServiceError {
+            throw error
         } catch {
             throw UserServiceError.repositoryError(error)
         }
