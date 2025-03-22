@@ -167,4 +167,11 @@ final class MuckTagViewModel: ObservableObject {
         }
     }
     
+    func refresh() {
+        isError = false
+        
+        Task {
+            await loadMuckTags()
+        }
+    }
 }
