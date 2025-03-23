@@ -14,7 +14,7 @@ final class MuckService {
     private let muckRepository: MuckRepository
     private let log = Logger.of("MuckService")
     
-    init(muckRepository: MuckRepository = MuckRepository()) {
+    init(muckRepository: MuckRepository = MuckRepository.shared) {
         self.muckRepository = muckRepository
     }
     

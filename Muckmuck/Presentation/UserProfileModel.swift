@@ -26,20 +26,26 @@ final class UserProfileModel: ObservableObject {
         onboardingNeeded = !userService.getUserOnboardingCompleted()
         
         if !onboardingNeeded {
-            loadUserProfile()
+            initUserProfile()
         }
     }
     
-    func loadUserProfile() {
+    func initUserProfile() {
         guard userService.getUserOnboardingCompleted() else {
             onboardingNeeded = true
             return
         }
         
         Task {
-            let userEntity = try await userService.getCurrentUser()
-            await MainActor.run {
-                currentUser = userEntity
+            do {
+                let userEntity = try await userService.getCurrentUser()
+                await MainActor.run {
+                    currentUser = userEntity
+                    settingNeeded = userEntity.nickname == ""
+                }
+                log.info("initUserProfile success")
+            } catch {
+                log.error("initUserProfile failed... \(error)")
             }
         }
     }
@@ -48,14 +54,15 @@ final class UserProfileModel: ObservableObject {
         Task {
             do {
                 let userEntity = try await userService.createNewUser()
-                
+                try await userService.updateNotificationToken()
                 await MainActor.run {
                     currentUser = userEntity
                     onboardingNeeded = false
                     settingNeeded = true
                 }
+                log.info("create user success")
             } catch {
-                log.error("create user failed...")
+                log.error("create user failed... \(error)")
             }
         }
     }

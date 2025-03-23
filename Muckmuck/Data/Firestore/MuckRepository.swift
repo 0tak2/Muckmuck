@@ -10,6 +10,8 @@ import os.log
 import FirebaseFirestore
 
 final class MuckRepository {
+    static let shared = MuckRepository()
+    
     private let stack = FirestoreStack.shared
     
     private let userCollectionId = "users"
@@ -39,10 +41,15 @@ final class MuckRepository {
     
     func deleteMuckTag(_ muckTagId: UUID) async throws {
         do {
-            var dict = try await stack.getDocument(collectionId: muckTagCollectionId, documentId: muckTagId.uuidString)
+            guard var dict = try await stack.getDocument(collectionId: muckTagCollectionId, documentId: muckTagId.uuidString) else {
+                throw UserRepositoryError.notFound
+            }
+            
             dict["isDeleted"] = true
             
             try await stack.setDocument(for: dict, id: muckTagId.uuidString, for: muckTagCollectionId)
+        } catch let error as UserRepositoryError {
+            throw error
         } catch {
             log.error("error from firestore: \(error)")
             throw UserRepositoryError.firestoreError(error)
@@ -51,7 +58,9 @@ final class MuckRepository {
     
     func getUser(id: String) async throws -> User {
         do {
-            let userDictionary = try await stack.getDocument(collectionId: userCollectionId, documentId: id)
+            guard var userDictionary = try await stack.getDocument(collectionId: userCollectionId, documentId: id) else {
+                throw UserRepositoryError.notFound
+            }
             
             if let id = userDictionary["id"] as? String,
                let nickname = userDictionary["nickname"] as? String,
@@ -61,6 +70,8 @@ final class MuckRepository {
                 log.error("every fields not resolved - getUser")
                 throw UserRepositoryError.fieldsNotResolved
             }
+        } catch let error as UserRepositoryError {
+            throw error
         } catch {
             log.error("error from firestore: \(error)")
             throw UserRepositoryError.firestoreError(error)
@@ -205,5 +216,6 @@ final class MuckRepository {
     enum UserRepositoryError: Error {
         case firestoreError(Error)
         case fieldsNotResolved
+        case notFound
     }
 }

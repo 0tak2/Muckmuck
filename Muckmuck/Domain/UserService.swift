@@ -6,23 +6,42 @@
 //
 
 import Foundation
+import Combine
 
 final class UserService {
-    let authRepository: AuthRepository
+    let authRepository: AuthManager
     let userRepository: UserRepository
+    let messagingManager: MessagingManager
     let defaultsRepository: UserDefaultsRepository
     
+    private var cancellables: Set<AnyCancellable> = []
+    
     init(
-        authRepository: AuthRepository,
+        authRepository: AuthManager,
         userRepository: UserRepository,
+        messagingManager: MessagingManager,
         defaultsRepository: UserDefaultsRepository
     ) {
         self.authRepository = authRepository
         self.userRepository = userRepository
+        self.messagingManager = messagingManager
         self.defaultsRepository = defaultsRepository
+        
+        messagingManager.tokenReceivedPublisher
+            .sink { _ in 
+                Task {
+                    try await self.updateNotificationToken()
+                }
+            }
+            .store(in: &cancellables)
     }
     
-    static let shared = UserService(authRepository: AuthRepository(), userRepository: UserRepository(), defaultsRepository: UserDefaultsRepository())
+    static let shared = UserService(
+        authRepository: AuthManager(),
+        userRepository: UserRepository.shared,
+        messagingManager: MessagingManager.shared,
+        defaultsRepository: UserDefaultsRepository()
+    )
     
     func getUserOnboardingCompleted() -> Bool {
         return defaultsRepository.get(.onboardingCompleted) ?? false
@@ -75,6 +94,22 @@ final class UserService {
         }
     }
     
+    func updateNotificationToken() async throws {
+        do {
+            guard let id = try await authRepository.login() else {
+                throw UserServiceError.userIdInvalid
+            }
+            
+            let token = try await messagingManager.getToken()
+            
+            try await userRepository.setUserToken(userId: id, token: token)
+        } catch let error as UserServiceError {
+            throw error
+        } catch {
+            throw UserServiceError.repositoryError(error)
+        }
+    }
+    
     private func setUserId(_ value: UUID) {
         defaultsRepository.write(.userId, value.uuidString)
     }
@@ -86,5 +121,6 @@ final class UserService {
     enum UserServiceError: Error {
         case repositoryError(Error)
         case userIdInvalid
+        case userNotFound
     }
 }

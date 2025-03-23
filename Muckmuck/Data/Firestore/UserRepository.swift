@@ -9,6 +9,8 @@ import Foundation
 import os.log
 
 final class UserRepository {
+    static let shared = UserRepository()
+    
     private let stack = FirestoreStack.shared
     
     private let collectionId = "users"
@@ -22,7 +24,8 @@ final class UserRepository {
                     "contactInfo": user.contactInfo
                 ],
                 id: user.id,
-                for: collectionId
+                for: collectionId,
+                merge: true
             )
         } catch {
             log.error("error from firestore: \(error)")
@@ -32,7 +35,9 @@ final class UserRepository {
     
     func getUser(id: String) async throws -> User {
         do {
-            let userDictionary = try await stack.getDocument(collectionId: collectionId, documentId: id)
+            guard let userDictionary = try await stack.getDocument(collectionId: collectionId, documentId: id) else {
+                throw UserRepositoryError.notFound
+            }
             
             if let id = userDictionary["id"] as? String,
                let nickname = userDictionary["nickname"] as? String,
@@ -42,6 +47,25 @@ final class UserRepository {
                 log.error("every fields not resolved - getUser")
                 throw UserRepositoryError.fieldsNotResolved
             }
+        } catch let error as UserRepositoryError {
+            throw error
+        } catch {
+            log.error("error from firestore: \(error)")
+            throw UserRepositoryError.firestoreError(error)
+        }
+    }
+    
+    func setUserToken(userId: String, token: String) async throws {
+        do {
+            guard var userDictionary = try await stack.getDocument(collectionId: collectionId, documentId: userId) else {
+                throw UserRepositoryError.notFound
+            }
+            
+            userDictionary["notificationToken"] = token
+            
+            try await stack.setDocument(for: userDictionary, id: userId, for: collectionId)
+        } catch let error as UserRepositoryError {
+            throw error
         } catch {
             log.error("error from firestore: \(error)")
             throw UserRepositoryError.firestoreError(error)
@@ -51,5 +75,6 @@ final class UserRepository {
     enum UserRepositoryError: Error {
         case firestoreError(Error)
         case fieldsNotResolved
+        case notFound
     }
 }
