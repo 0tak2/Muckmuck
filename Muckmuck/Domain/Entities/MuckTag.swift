@@ -27,44 +27,4 @@ struct MuckTag: Hashable {
         self.reactions = reactions
         self.isDeleted = isDeleted
     }
-    
-#if DEBUG
-    static let dummyData: [MuckTag] = [
-        .init(
-            id: UUID(),
-            region: .hyoja,
-            createdBy: User.dummyUserBob,
-            createdAt: Date(),
-            availableUntil: Date(),
-            type: .bob,
-            reactions: [
-                .init(id: UUID(), createdBy: User.dummyUserJoid, createdAt: Date()),
-                .init(id: UUID(), createdBy: User.dummyUserLuke, createdAt: Date())
-            ]
-        ),
-        .init(
-            id: UUID(),
-            region: .daeii,
-            createdBy: User.dummyUserJoid,
-            createdAt: Date(),
-            availableUntil: Date(),
-            type: .drink,
-            reactions: [
-                .init(id: UUID(), createdBy: User.dummyUserBob, createdAt: Date())
-            ]
-        ),
-        .init(
-            id: UUID(),
-            region: .ugang,
-            createdBy: User.dummyUserLuke,
-            createdAt: Date(),
-            availableUntil: Date(),
-            type: .cafe,
-            reactions: [
-                .init(id: UUID(), createdBy: User.dummyUserJoid, createdAt: Date()),
-                .init(id: UUID(), createdBy: User.dummyUserBob, createdAt: Date())
-            ]
-        )
-    ]
-#endif
 }
