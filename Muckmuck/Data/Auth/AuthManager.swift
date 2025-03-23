@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseAuth
 
-final class AuthRepository {
+final class AuthManager {
     typealias UserID = String
     
     func login() async throws -> UserID? {
