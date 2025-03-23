@@ -23,4 +23,8 @@ final class AuthManager {
             }
         }
     }
+    
+    func logout() throws {
+        try Auth.auth().signOut()
+    }
 }

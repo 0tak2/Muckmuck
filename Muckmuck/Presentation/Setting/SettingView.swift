@@ -22,6 +22,11 @@ struct SettingView: View {
                 Section {
                     Text("유저 고유ID")
                     Text(userProfileModel.currentUser?.id ?? "Invalid")
+                    Button {
+                        settingViewModel.showSignOutAlert = true
+                    } label: {
+                        Text("회원 탈퇴")
+                    }
                 }
                 
                 Section {
@@ -44,6 +49,16 @@ struct SettingView: View {
             }
             .alert(settingViewModel.errorMessage, isPresented: $settingViewModel.isError) {
                 Button("확인", role: .cancel) { }
+            }
+            .alert("정말로 탈퇴하시겠습니까?", isPresented: $settingViewModel.showSignOutAlert) {
+                Button("취소", role: .cancel) { }
+                
+                Button("탈퇴", role: .destructive) {
+                    // FIXME: Two view models are used separately
+                    settingViewModel.signOut()
+                    userProfileModel.onboardingNeeded = true
+                    userProfileModel.settingNeeded = true
+                }
             }
         }
         .onAppear {

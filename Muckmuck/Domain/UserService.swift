@@ -110,6 +110,17 @@ final class UserService {
         }
     }
     
+    func signOut() throws {
+        do {
+            try authRepository.logout()
+            defaultsRepository.write(.onboardingCompleted, false)
+        } catch let error as UserServiceError {
+            throw error
+        } catch {
+            throw UserServiceError.repositoryError(error)
+        }
+    }
+    
     private func setUserId(_ value: UUID) {
         defaultsRepository.write(.userId, value.uuidString)
     }

@@ -20,6 +20,7 @@ final class SettingViewModel: ObservableObject {
     @Published var isError: Bool = false
     @Published var errorMessage: String = "오류가 발생했습니다."
     @Published var showCompleteAlert: Bool = false
+    @Published var showSignOutAlert: Bool = false
     
     func onAppear() {
         Task {
@@ -65,5 +66,14 @@ final class SettingViewModel: ObservableObject {
     
     func endEditing() {
         UIApplication.shared.endEditing()
+    }
+    
+    func signOut() {
+        do {
+            try userService.signOut()
+            
+        } catch {
+            isError = true
+        }
     }
 }
