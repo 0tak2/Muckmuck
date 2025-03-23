@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3D5AED3A2D8F705F009BC1CA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 3D5AED392D8F705F009BC1CA /* FirebaseAuth */; };
+		3DDA56ED2D8FAA8C00362F58 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3DDA56EC2D8FAA8800362F58 /* README.md */; };
 		3DDF4F9E2D8E8FBF00BEDBBA /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3DDF4F9D2D8E8FBF00BEDBBA /* FirebaseAnalytics */; };
 		3DDF4FA02D8E8FBF00BEDBBA /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 3DDF4F9F2D8E8FBF00BEDBBA /* FirebaseFirestore */; };
 		3DDF4FA22D8E8FBF00BEDBBA /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 3DDF4FA12D8E8FBF00BEDBBA /* FirebaseFunctions */; };
@@ -32,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3DDA56EC2D8FAA8800362F58 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3DDF4F402D8E407000BEDBBA /* Muckmuck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Muckmuck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DDF4F502D8E407100BEDBBA /* MuckmuckTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MuckmuckTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DDF4F5A2D8E407100BEDBBA /* MuckmuckUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MuckmuckUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,6 +103,7 @@
 		3DDF4F372D8E407000BEDBBA = {
 			isa = PBXGroup;
 			children = (
+				3DDA56EC2D8FAA8800362F58 /* README.md */,
 				3DDF4F422D8E407000BEDBBA /* Muckmuck */,
 				3DDF4F532D8E407100BEDBBA /* MuckmuckTests */,
 				3DDF4F5D2D8E407100BEDBBA /* MuckmuckUITests */,
@@ -247,6 +250,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DDA56ED2D8FAA8C00362F58 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
